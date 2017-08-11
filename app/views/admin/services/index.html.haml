@@ -26,7 +26,7 @@
         %td= service_types(service.service_type)
         %td= service.service_address
         %td= service.service_phonenumber
-        %td= link_to t('helpers.show'), service
+        %td= link_to t('helpers.show'), admin_service_path(service)
         /%td= link_to 'Edit', edit_service_path(service)
         /%td= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }
 
