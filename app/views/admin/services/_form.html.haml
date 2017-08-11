@@ -1,0 +1,41 @@
+= form_for admin_services_path, :html => { :multipart => true } do |f|
+  - if @service.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
+      %ul
+        - @service.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :service_name
+    = f.text_field :service_name
+  .field
+    = f.label :service_type
+    - Service::SERVICE_TYPES.each do |k, v|
+      %div
+        = check_box_tag "service[service_type][]", k
+        %span= v
+  /= f.label :service_type
+  /= f.number_field :service_type
+  .field
+    = f.label :service_address
+    = f.text_field :service_address
+  .field
+    = f.label :service_phonenumber
+    = f.text_field :service_phonenumber
+
+  = f.fields_for :pictures do |pic|
+    .field
+      = pic.label :image
+      /= t.text_field :image
+      /- next if @service.pictures.new_record?
+      /- if @service.pictures.present?
+      %ol
+        -@service.pictures.each do |attachment|
+          - next if attachment.new_record?
+          %li=link_to_image(attachment)
+    .field
+      = pic.file_field :image
+
+  .actions
+    = f.submit t('helpers.submit.submit')

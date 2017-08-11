@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b
+    = Service.human_attribute_name(:service_name) + ":"
+  = @service.service_name
+%p
+  %b
+    = Service.human_attribute_name(:service_type) + ":"
+  = service_types(@service.service_type)
+%p
+  %b
+    = Service.human_attribute_name(:service_address) + ":"
+  = @service.service_address
+%p
+  %b
+    = Service.human_attribute_name(:service_phonenumber) + ":"
+  = number_to_phone(@service.service_phonenumber, pattern: /(\d{1,1})(\d{3})(\d{4})$/)
+%p
+  %b
+  / - @service.pictures.each do |picture|
+  /   /= image_tag(picture.image.url) if picture.present?
+  /   = link_to_image(picture)
+  /= image_tag(picture.image.url(:thumb))
+  /   /%a{:href => picture.image.url}
+  /   / image_tag(picture.image.url(:thumb))
+
+= link_to t('helpers.edit'), edit_admin_service_path(@service)
+/\|
+= link_to t('helpers.back'), admin_services_path

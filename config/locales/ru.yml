@@ -1,0 +1,30 @@
+ru:
+  app:
+    name: Агрегатор автосервисов
+  helpers:
+    sure: Вы уверены?
+    submit:
+      create: Сохранить
+      submit: Сохранить
+      update: Сохранить
+      login: Войти
+    back: Назад
+    listing: Список
+    show: Показать
+    edit: Редактировать
+    editing: Редактирование
+    destroy: Удалить
+    search: Искать
+    new: Новый
+  activerecord:
+    models:
+      service:
+        one: автосервис
+        few: автосервисa
+        many: автосервисов
+    attributes:
+      service:
+        service_name: Название
+        service_type: Услуги
+        service_address: Адрес
+        service_phonenumber: Номер телефона

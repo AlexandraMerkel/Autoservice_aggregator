@@ -1,0 +1,7 @@
+%h1
+  = t('helpers.new')
+  = Service.model_name.human(count: 1)
+
+= render 'form'
+
+= link_to t('helpers.back'), admin_services_path

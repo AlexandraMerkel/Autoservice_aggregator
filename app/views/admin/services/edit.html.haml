@@ -1,0 +1,9 @@
+%h1
+  = t('helpers.editing')
+  = Service.model_name.human(count: 2)
+
+= render 'form'
+
+= link_to t('helpers.show'), @service
+\|
+= link_to t('helpers.back'), admin_services_path
