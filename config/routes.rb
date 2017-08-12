@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get 'services/index'
-  get 'services/show'
+  get 'services/show', as: :service
 
   namespace :admin do
     resources :services

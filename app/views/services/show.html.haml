@@ -20,10 +20,11 @@
   %b
   - @service.pictures.each do |picture|
     /= image_tag(picture.image.url) if picture.present?
-    = link_to_image(picture)
+    = image_tag(picture.image.url(:thumb))
+    /= link_to_image(picture)
     /%a{:href => picture.image.url}
     / image_tag(picture.image.url(:thumb))
 
-= link_to t('helpers.edit'), edit_service_path(@service)
+/= link_to t('helpers.edit'), edit_service_path(@service)
 /\|
-= link_to t('helpers.back'), services_path
+= link_to t('helpers.back'), services_index_path

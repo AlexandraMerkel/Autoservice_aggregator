@@ -9,7 +9,7 @@ module ServicesHelper
       concat content_tag(:span, nil, class: 'glyphicon glyphicon-paperclip')
       concat show_image(attachment)
     end
-end
+  end
 
   def service_types(chosen_types)
     types = []
@@ -17,6 +17,10 @@ end
       types << Service::SERVICE_TYPES[t]
     end
     types.join(", ")
+  end
+
+  def service_type_options
+    options_for_select(Service::SERVICE_TYPES.map { |k, v| [v, k]})
   end
 
 end

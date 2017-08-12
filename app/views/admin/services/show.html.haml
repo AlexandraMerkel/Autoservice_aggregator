@@ -18,7 +18,8 @@
   = number_to_phone(@service.service_phonenumber, pattern: /(\d{1,1})(\d{3})(\d{4})$/)
 %p
   %b
-  / - @service.pictures.each do |picture|
+  - @service.pictures.each do |picture|
+    = image_tag(picture.image.url(:medium))
   /   /= image_tag(picture.image.url) if picture.present?
   /   = link_to_image(picture)
   /= image_tag(picture.image.url(:thumb))
@@ -26,5 +27,7 @@
   /   / image_tag(picture.image.url(:thumb))
 
 = link_to t('helpers.edit'), edit_admin_service_path(@service)
+/\|
+= link_to t('helpers.destroy'), admin_service_path(@service), method: :delete, data: { confirm: 'Are you sure?' }
 /\|
 = link_to t('helpers.back'), admin_services_path

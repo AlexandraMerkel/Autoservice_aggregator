@@ -1,5 +1,5 @@
 class Service < ApplicationRecord
-  has_many :pictures, inverse_of: :service
+  has_many :pictures, inverse_of: :service, dependent: :destroy
 
   SERVICE_TYPES = {
     0 => 'диагностика',
@@ -25,6 +25,19 @@ class Service < ApplicationRecord
     else
       self[:service_type]=val
     end
+  end
+
+  def Service.search_by_name(services, param)
+    param = param.to_s
+    #params = params.to_s.gsub(/\s+/, '')
+    @services = services
+    @services.where("service_name ILIKE ?", '%' + param + '%')
+  end
+
+  def Service.search_by_address(services, param)
+    param = param.to_s
+    @services = services
+    @services.where("service_address ILIKE ?", '%' + param + '%')
   end
 
 end

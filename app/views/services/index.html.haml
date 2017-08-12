@@ -3,9 +3,12 @@
   = Service.model_name.human(count: 10)
 
 = form_tag(services_index_path, method: :get) do
-  =text_field_tag('name_of_service', '', :placeholder => "Поиск автосервиса")
-  %button{:type => "submit"}
-    Искать
+  #service-name
+    =text_field_tag('service_name', '', :placeholder => "Название", class: 'typeahead')
+    =text_field_tag('service_address', '', :placeholder => "Адрес")
+    =select_tag('test', service_type_options)
+    %button{:type => "submit"}
+      Искать
 
 
 %table
@@ -26,9 +29,4 @@
         %td= service_types(service.service_type)
         %td= service.service_address
         %td= service.service_phonenumber
-        %td= link_to t('helpers.show'), service_path(service)
-        /%td= link_to 'Edit', edit_service_path(service)
-        /%td= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }
-
-/%br
-/  = link_to t('helpers.new') + ' ' + Service.model_name.human(count: 1), new_service_path
+        %td= link_to t('helpers.show'), service_path(id: service.id)

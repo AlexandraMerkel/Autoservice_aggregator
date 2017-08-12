@@ -31,6 +31,7 @@ gem 'rails-i18n'
 gem 'haml-rails'
 gem 'paperclip'
 gem 'twitter-typeahead-rails'
+gem 'maskedinput-rails'
 gem 'sorcery'
 
 # Use Capistrano for deployment
