@@ -3,18 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-###start_typeahead_f = ->
-  $('#service-name .#service-name .typeahead').typeahead({
-    hint: true,
-    highlight: true,
-    minLength: 1
-  }, {
-    name: 'services',
-    source: (query)->
-      return $.get('/services/index.json')
-  })
-###
-
 services_names = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -49,7 +37,19 @@ service_type_typeahead_f = ->
     source: service_types.ttAdapter()
   })
 
+service_types_tagsinput_f = ->
+  $('#service-type .typeahead').tagsinput({
+    typeahead: {
+      #displayKey: 'text',
+      source: service_types.ttAdapter()
+      #afterSelect: ->
+      #  this.$element[0].value = ''
+    }
+})
+
+
 $(document).on 'turbolinks:load', ->
   #type_func()
   service_name_typeahead_f()
+  #service_types_tagsinput_f()
   service_type_typeahead_f()

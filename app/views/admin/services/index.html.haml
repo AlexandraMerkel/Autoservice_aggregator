@@ -8,27 +8,40 @@
 /     Искать
 
 
-%table
-  %thead
-    %tr
-      %th= Service.human_attribute_name(:service_name)
-      %th= Service.human_attribute_name(:service_type)
-      %th= Service.human_attribute_name(:service_address)
-      %th= Service.human_attribute_name(:service_phonenumber)
-      %th
-      %th
-      %th
+.list-group
+  - @services.each do |service|
+    = link_to(admin_service_path(service), class: 'list-group-item') do
+      = service.service_name
+      .toright
+        %span.label.label-info
+          = service.service_address
+        %span.label.label-warning
+          = service.service_phonenumber
+        /- service.service_type.each do |s_type|
+        /  %span.label.label-info
+        /    = f_service_types(s_type)
+      .clearfix
 
-  %tbody
-    - @services.each do |service|
-      %tr
-        %td= service.service_name
-        %td= service_types(service.service_type)
-        %td= service.service_address
-        %td= service.service_phonenumber
-        %td= link_to t('helpers.show'), admin_service_path(service)
-        /%td= link_to 'Edit', edit_service_path(service)
-        /%td= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }
+/ %table
+/   %thead
+/     %tr
+/       %th= Service.human_attribute_name(:service_name)
+/       %th= Service.human_attribute_name(:service_type)
+/       %th= Service.human_attribute_name(:service_address)
+/       %th= Service.human_attribute_name(:service_phonenumber)
+/       %th
+/       %th
+/       %th
 
-%br
-  = link_to t('helpers.new') + ' ' + Service.model_name.human(count: 1), new_admin_service_path
+/   %tbody
+/     - @services.each do |service|
+/       %tr
+/         %td= service.service_name
+/         %td= service_types(service.service_type)
+/         %td= service.service_address
+/         %td= service.service_phonenumber
+/         %td= link_to t('helpers.show'), admin_service_path(service)
+/         /%td= link_to 'Edit', edit_service_path(service)
+/         /%td= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }
+
+= link_to t('helpers.new') + ' ' + Service.model_name.human(count: 1), new_admin_service_path, class: "btn btn-success"

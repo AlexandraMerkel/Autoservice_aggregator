@@ -42,4 +42,17 @@ class Service < ApplicationRecord
     @services.where("service_address ILIKE ?", '%' + param + '%')
   end
 
+  def types_transform(types)
+    keys = []
+    SERVICE_TYPES.map{ |k, v| keys << k if v.eql?(types) }
+  end
+
+  def Service.search_by_service(services, param)
+    param = param.to_s
+    puts param
+    @services = services
+    types = types_transform(param)
+    @services.where("service_type = ?", types)
+  end
+
 end

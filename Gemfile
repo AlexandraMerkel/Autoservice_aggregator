@@ -33,6 +33,8 @@ gem 'paperclip'
 gem 'twitter-typeahead-rails'
 gem 'maskedinput-rails'
 gem 'sorcery'
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

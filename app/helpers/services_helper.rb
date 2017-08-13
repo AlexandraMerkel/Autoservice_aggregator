@@ -1,5 +1,6 @@
 module ServicesHelper
 
+=begin
   def show_image(attachment)
     "#{attachment.image_file_name} (#{number_to_human_size(attachment.image_file_size)})"
   end
@@ -10,6 +11,8 @@ module ServicesHelper
       concat show_image(attachment)
     end
   end
+=end
+
 
   def service_types(chosen_types)
     types = []
@@ -17,6 +20,10 @@ module ServicesHelper
       types << Service::SERVICE_TYPES[t]
     end
     types.join(", ")
+  end
+
+  def f_service_types(chosen_types)
+    Service::SERVICE_TYPES[chosen_types]
   end
 
   def service_type_options

@@ -6,38 +6,43 @@
         - @service.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :service_name
-    = f.text_field :service_name
-  .field
-    = f.label :service_type
-    - Service::SERVICE_TYPES.each do |k, v|
-      %div
-        = check_box_tag "service[service_type][]", k
-        %span= v
-  /= f.label :service_type
-  /= f.number_field :service_type
-  .field
-    = f.label :service_address
-    = f.text_field :service_address
-  .field
-    = f.label :service_phonenumber
-    = f.text_field :service_phonenumber, id: 'phone'
-
-  .field
-    = f.label :image
+  .row
+    .col-md-8
+      .form-group
+        = f.label :service_name
+        = f.text_field :service_name
+  .row
+    .col-md-8
+      .form-group
+        = f.label :service_type
+        - Service::SERVICE_TYPES.each do |k, v|
+          %div
+            = check_box_tag "service[service_type][]", k
+            %span= v
+  .row
+    .col-md-8
+      .form-group
+        = f.label :service_address
+        = f.text_field :service_address
+  .row
+    .col-md-8
+      .form-group
+        = f.label :service_phonenumber
+        = f.text_field :service_phonenumber, id: 'phone'
+  .row
+    .col-md-8
+      .form-group
+        = f.label :image
 
   = f.fields_for :pictures do |pic|
     - if pic.object.new_record?
-      /.field
-      /  = pic.label :image
-      .field
-        = pic.file_field :image
-    /- else
+      .row
+        .col-md-8
+          .form-group
+            = pic.file_field :image
   - @service.pictures.each do |attachment|
     - next if attachment.new_record?
     = image_tag(attachment.image.url(:thumb))
 
-
   .actions
-    = f.submit t('helpers.submit.submit')
+    = f.submit t('helpers.submit.submit'), class: 'btn btn-primary'

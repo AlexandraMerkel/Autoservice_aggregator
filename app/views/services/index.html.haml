@@ -2,33 +2,70 @@
   = t('helpers.listing')
   = Service.model_name.human(count: 10)
 
+/ = form_tag(services_index_path, method: :get) do
+/   .row
+/     .col-md-10
+/       .form-group
+/         #service-name
+/           =text_field_tag('service_name', '', :placeholder => "Название", class: 'typeahead')
+/   .row
+/     .col-md-10
+/       .form-group
+/         =text_field_tag('service_address', '', :placeholder => "Адрес")
+/   .row
+/     .col-md-10
+/       .form-group
+/         #service-type
+/           =text_field_tag('service_types', '', :placeholder => "Услуги", class: 'typeahead tagsInput', data: {types:Service::SERVICE_TYPES_FOR_TYPEAHAED})
+/           /=select_tag('test', service_type_options)
+/     %button{:type => "submit", class: 'btn btn-primary'}
+/       Искать
+
 = form_tag(services_index_path, method: :get) do
-  #service-name
-    =text_field_tag('service_name', '', :placeholder => "Название", class: 'typeahead')
-    =text_field_tag('service_address', '', :placeholder => "Адрес")
-  #service-type
-    =text_field_tag('service_types', '', :placeholder => "Услуги", class: 'typeahead', data: {types:Service::SERVICE_TYPES_FOR_TYPEAHAED})
+  .row
+    .col-md-8
+      .input-group
+        #service-name
+          %input.form-control{"aria-describedby" => "basic-addon", :name => "service_name", :placeholder => "Название", :type => "text", class: 'typeahead'}
+      .input-group
+        #service-type
+          %input.form-control{"aria-describedby" => "basic-addon", :name => "service_types", :placeholder => "Услуги", :type => "text", class: 'typeahead', data: { types: Service::SERVICE_TYPES_FOR_TYPEAHAED}}
+      .input-group
+        %input.form-control{"aria-describedby" => "basic-addon", :name => "service_address", :placeholder => "Адрес", :type => "text"}
     /=select_tag('test', service_type_options)
-    %button{:type => "submit"}
-      Искать
+  %button{:type => "submit", class: 'btn btn-primary', style: 'margin: 10px 0 10px 0 ;'}
+    Искать
 
+.list-group
+  - @services.each do |service|
+    = link_to(service_path(id: service.id), class: 'list-group-item') do
+      = service.service_name
+      .toright
+        %span.label.label-info
+          = service.service_address
+        %span.label.label-warning
+          = service.service_phonenumber
+        /- service.service_type.each do |s_type|
+        /  %span.label.label-info
+        /    = f_service_types(s_type)
+      .clearfix
 
-%table
-  %thead
-    %tr
-      %th= Service.human_attribute_name(:service_name)
-      %th= Service.human_attribute_name(:service_type)
-      %th= Service.human_attribute_name(:service_address)
-      %th= Service.human_attribute_name(:service_phonenumber)
-      %th
-      %th
-      %th
+/ %table.table
+/   %thead
+/     %tr
+/       %th= Service.human_attribute_name(:service_name)
+/       %th= Service.human_attribute_name(:service_type)
+/       %th= Service.human_attribute_name(:service_address)
+/       %th= Service.human_attribute_name(:service_phonenumber)
+/       %th
+/       %th
+/       %th
 
-  %tbody
-    - @services.each do |service|
-      %tr
-        %td= service.service_name
-        %td= service_types(service.service_type)
-        %td= service.service_address
-        %td= service.service_phonenumber
-        %td= link_to t('helpers.show'), service_path(id: service.id)
+/   %tbody
+/     - @services.each do |service|
+/       %tr
+/         %td= service.service_name
+/         %td= service_types(service.service_type)
+/         %td= service.service_address
+/         %td= service.service_phonenumber
+/         %td= link_to t('helpers.show'), service_path(id: service.id)
