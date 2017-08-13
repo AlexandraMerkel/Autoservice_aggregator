@@ -15,14 +15,24 @@ class ServicesController < ApplicationController
       format.json do
         @services = Service.order("service_name").all
         render json: (@services.map do |s|
-          {text: s.service_name }
-          #id: s.id}
+          {name: s.service_name }
+        #end
+        #Service::SERVICE_TYPES.map do |k, v|
+        #  { type: v }
         end)
+          #id: s.id}
       end
     end
   end
 
   def show
+    respond_to do |format|
+      format.json do
+       render json: (Service::SERVICE_TYPES.map do |k, v|
+          { type: v }
+        end)
+      end
+    end
   end
 
   private

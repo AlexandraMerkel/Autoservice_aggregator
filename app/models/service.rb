@@ -12,6 +12,8 @@ class Service < ApplicationRecord
     7 => 'дополнительные услуги'
   }
 
+ SERVICE_TYPES_FOR_TYPEAHAED = SERVICE_TYPES.map { |k, v| v }
+
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   validates :service_name, presence: true

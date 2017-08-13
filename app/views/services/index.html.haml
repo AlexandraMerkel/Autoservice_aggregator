@@ -6,7 +6,9 @@
   #service-name
     =text_field_tag('service_name', '', :placeholder => "Название", class: 'typeahead')
     =text_field_tag('service_address', '', :placeholder => "Адрес")
-    =select_tag('test', service_type_options)
+  #service-type
+    =text_field_tag('service_types', '', :placeholder => "Услуги", class: 'typeahead', data: {types:Service::SERVICE_TYPES_FOR_TYPEAHAED})
+    /=select_tag('test', service_type_options)
     %button{:type => "submit"}
       Искать
 
