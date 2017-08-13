@@ -1,6 +1,6 @@
 class Admin::ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-  #skip_before_action :require_login, only: [:index]
+  skip_before_action :require_login, only: [:index]
 
   # GET /services
   # GET /services.json

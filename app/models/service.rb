@@ -49,7 +49,6 @@ class Service < ApplicationRecord
 
   def Service.search_by_service(services, param)
     param = param.to_s
-    puts param
     @services = services
     types = types_transform(param)
     @services.where("service_type = ?", types)
