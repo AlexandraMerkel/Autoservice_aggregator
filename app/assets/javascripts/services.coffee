@@ -2,7 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-
 services_names = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -11,12 +10,14 @@ services_names = new Bloodhound({
 services_names.clearPrefetchCache()
 services_names.initialize()
 
-###type_func = ->
-  arr = $('#service-type .typeahead').attr('data-types')
-  console.log('local ' + arr)###
+###
+type_func = ->
+  window.types = $('#service-type .typeahead').attr('data-types')
+  console.log('local ' + window.types)
+###
 
 types = ["диагностика","ремонт двигателя","работы по ходовой части","работы по электрической части","регламентное техобслуживание","кузовные работы","шиномонтаж","дополнительные услуги"]
-#console.log types
+#console.log('global ' + @types)
 
 service_types = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.whitespace,
@@ -33,19 +34,8 @@ service_name_typeahead_f = ->
 
 service_type_typeahead_f = ->
   $('#service-type .typeahead').typeahead(null, {
-    #displayKey: 'text',
     source: service_types.ttAdapter()
   })
-
-service_types_tagsinput_f = ->
-  $('#service-type .typeahead').tagsinput({
-    typeahead: {
-      #displayKey: 'text',
-      source: service_types.ttAdapter()
-      #afterSelect: ->
-      #  this.$element[0].value = ''
-    }
-})
 
 
 $(document).on 'turbolinks:load', ->

@@ -2,39 +2,25 @@
   = t('helpers.listing')
   = Service.model_name.human(count: 10)
 
-/ = form_tag(services_index_path, method: :get) do
-/   .row
-/     .col-md-10
-/       .form-group
-/         #service-name
-/           =text_field_tag('service_name', '', :placeholder => "Название", class: 'typeahead')
-/   .row
-/     .col-md-10
-/       .form-group
-/         =text_field_tag('service_address', '', :placeholder => "Адрес")
-/   .row
-/     .col-md-10
-/       .form-group
-/         #service-type
-/           =text_field_tag('service_types', '', :placeholder => "Услуги", class: 'typeahead tagsInput', data: {types:Service::SERVICE_TYPES_FOR_TYPEAHAED})
-/           /=select_tag('test', service_type_options)
-/     %button{:type => "submit", class: 'btn btn-primary'}
-/       Искать
-
 = form_tag(services_index_path, method: :get) do
   .row
-    .col-md-8
-      .input-group
+    .col-md-10
+      .form-group
         #service-name
-          %input.form-control{"aria-describedby" => "basic-addon", :name => "service_name", :placeholder => "Название", :type => "text", class: 'typeahead'}
-      .input-group
+          =text_field_tag('service_name', '', :placeholder => "Название", class: 'typeahead form-control')
+  .row
+    .col-md-10
+      .form-group
         #service-type
-          %input.form-control{"aria-describedby" => "basic-addon", :name => "service_types", :placeholder => "Услуги", :type => "text", class: 'typeahead', data: { types: Service::SERVICE_TYPES_FOR_TYPEAHAED}}
-      .input-group
-        %input.form-control{"aria-describedby" => "basic-addon", :name => "service_address", :placeholder => "Адрес", :type => "text"}
-    /=select_tag('test', service_type_options)
-  %button{:type => "submit", class: 'btn btn-primary', style: 'margin: 10px 0 10px 0 ;'}
-    Искать
+          =text_field_tag('service_types', '', :placeholder => "Услуги", class: 'typeahead form-control', data: {types:Service::SERVICE_TYPES_FOR_TYPEAHAED})
+          /=select_tag('test', service_type_options)
+  .row
+    .col-md-4
+      .form-group
+        =text_field_tag('service_address', '', :placeholder => "Адрес", class: 'form-control')
+
+    %button{:type => "submit", class: 'btn btn-primary'}
+      Искать
 
 .list-group
   - @services.each do |service|
@@ -49,23 +35,3 @@
         /  %span.label.label-info
         /    = f_service_types(s_type)
       .clearfix
-
-/ %table.table
-/   %thead
-/     %tr
-/       %th= Service.human_attribute_name(:service_name)
-/       %th= Service.human_attribute_name(:service_type)
-/       %th= Service.human_attribute_name(:service_address)
-/       %th= Service.human_attribute_name(:service_phonenumber)
-/       %th
-/       %th
-/       %th
-
-/   %tbody
-/     - @services.each do |service|
-/       %tr
-/         %td= service.service_name
-/         %td= service_types(service.service_type)
-/         %td= service.service_address
-/         %td= service.service_phonenumber
-/         %td= link_to t('helpers.show'), service_path(id: service.id)

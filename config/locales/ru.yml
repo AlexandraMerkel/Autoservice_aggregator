@@ -10,18 +10,24 @@ ru:
       login: Войти
     back: Назад
     listing: Список
+    tolist: Назад к списку
     show: Показать
     edit: Редактировать
     editing: Редактирование
     destroy: Удалить
     search: Искать
     new: Новый
+    login: Войдите для доступа к дополнительным ресурсам системы
   activerecord:
     models:
       service:
         one: автосервис
         few: автосервисa
         many: автосервисов
+      user:
+        one: пользователь
+        few: пользователя
+        many: пользователей
     attributes:
       service:
         service_name: Название
@@ -31,3 +37,7 @@ ru:
         image: Изображения
       picture:
         image: Изображения
+      user:
+        email: Электронная почта
+        password: Пароль
+        password_confirmation: Повторите пароль

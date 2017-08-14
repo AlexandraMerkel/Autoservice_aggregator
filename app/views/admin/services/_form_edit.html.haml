@@ -7,12 +7,12 @@
           %li= message
 
   .row
-    .col-md-8
+    .col-md-4
       .form-group
         = f.label :service_name
-        = f.text_field :service_name
+        = f.text_field :service_name, class: 'form-control'
   .row
-    .col-md-8
+    .col-md-6
       .form-group
         = f.label :service_type
         - Service::SERVICE_TYPES.each do |k, v|
@@ -20,29 +20,40 @@
             = check_box_tag "service[service_type][]", k
             %span= v
   .row
-    .col-md-8
+    .col-md-6
       .form-group
         = f.label :service_address
-        = f.text_field :service_address
-  .row
-    .col-md-8
+        = f.text_field :service_address, class: 'form-control'
+    .col-md-2
       .form-group
         = f.label :service_phonenumber
-        = f.text_field :service_phonenumber, id: 'phone'
+        = f.text_field :service_phonenumber, class: 'form-control'
   .row
-    .col-md-8
+    .col-md-4
       .form-group
         = f.label :image
 
   = f.fields_for :pictures do |pic|
     - if pic.object.new_record?
       .row
-        .col-md-8
+        .col-md-4
           .form-group
             = pic.file_field :image
   - @service.pictures.each do |attachment|
     - next if attachment.new_record?
-    = image_tag(attachment.image.url(:thumb))
+    .row
+      .col-md-6
+        .form-group
+          = image_tag(attachment.image.url(:thumb))
+          = link_to admin_picture_path(attachment), method: :delete, data: { confirm: 'Вы уверены?' } do
+            = fa_icon('remove', title: 'Удалить изображение', style: 'color: #4E5A68;')
+  .row
+    .col-md-8
+      .form-group
+        .actions
+          = f.submit t('helpers.submit.submit'), class: 'btn btn-primary'
 
-  .actions
-    = f.submit t('helpers.submit.submit'), class: 'btn btn-primary'
+  / .row
+  /   .col-md-8
+  /     .form-group
+  /       = link_to t('helpers.back'), admin_service_path(@service), class: 'btn btn-info'

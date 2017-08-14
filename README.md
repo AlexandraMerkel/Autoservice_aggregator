@@ -1,24 +1,27 @@
-# README
+# Тестовое задание «Агрегатор автосервисов»
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Интерфейсы:
+* Поиск автосервисов с возможностью фильтрации по: имени, адресу, предоставляемым услугам;
+* Детальный просмотр автосервиса;
+* Страница аутентификации для модераторов, где можно зарегистрировать новый автосервис, либо отредактировать/удалить существующий;
 
-Things you may want to cover:
+Модели (минимальный набор):
+* Автосервис
+  - наименование;
+  - адрес;
+  - список предоставляемых услуг;
+  - контактный телефон.
+* Модератор
+  - email;
+  - пароль.
 
-* Ruby version
+Поиск:
+* Для поиска по имени/услугам необходимо использовать автодополнение;
+* Результат отсортировать по убыванию количества совпавших услуг из фильтрации.
 
-* System dependencies
+Редактирование:
+* Доступ к странице только у модераторов через отдельную ссылку (например, `/admin`);
+* Возможность добавить фотографию.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Технические требования:
+Ruby on Rails 5, PostgreSQL, RSpec, Git, JavaScript (желательно AngularJS)

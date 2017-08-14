@@ -1,6 +1,8 @@
-%h1 Editing user
+%h1
+  = t('helpers.editing')
+  = User.model_name.human(count: 2)
 
-= render 'form'
+= render 'form_edit'
 
 /= link_to 'Show', @user
 /\|

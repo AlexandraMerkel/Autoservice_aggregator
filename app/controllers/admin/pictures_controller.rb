@@ -1,4 +1,4 @@
-class Admin::PicturesController < ApplicationController
+class Admin::PicturesController < AdminController
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   # GET /pictures
@@ -56,7 +56,7 @@ class Admin::PicturesController < ApplicationController
   def destroy
     @picture.destroy
     respond_to do |format|
-      format.html { redirect_to pictures_url, notice: 'Picture was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: root_path, notice: 'Picture was successfully destroyed.') }
       format.json { head :no_content }
     end
   end

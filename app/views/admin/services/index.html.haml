@@ -22,6 +22,8 @@
         /    = f_service_types(s_type)
       .clearfix
 
+
+= link_to t('helpers.new') + ' ' + Service.model_name.human(count: 1), new_admin_service_path, class: "btn btn-success"
 / %table
 /   %thead
 /     %tr
@@ -43,5 +45,3 @@
 /         %td= link_to t('helpers.show'), admin_service_path(service)
 /         /%td= link_to 'Edit', edit_service_path(service)
 /         /%td= link_to 'Destroy', service, method: :delete, data: { confirm: 'Are you sure?' }
-
-= link_to t('helpers.new') + ' ' + Service.model_name.human(count: 1), new_admin_service_path, class: "btn btn-success"

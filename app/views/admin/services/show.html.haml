@@ -23,6 +23,6 @@
 
 = link_to t('helpers.edit'), edit_admin_service_path(@service), class: 'btn btn-warning'
 
-= link_to t('helpers.destroy'), admin_service_path(@service), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+= link_to t('helpers.destroy'), admin_service_path(@service), method: :delete, data: { confirm: 'Вы уверены?' }, class: 'btn btn-danger'
 
-/= link_to t('helpers.back'), admin_services_path
+= link_to t('helpers.tolist'), admin_services_path, class: 'btn btn-info'

@@ -8,22 +8,21 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <div id="nav">
-    <% if current_user %>
-      <%= link_to "Edit Profile", edit_admin_user_path(current_user.id) %>
-      <%= link_to "Logout", :logout, method: :post %>
-    <% else %>
-      <%= link_to "Register", new_admin_user_path %> |
-      <%= link_to "Login", :login %>
-    <% end %>
-  </div>
-  <div>
-    <p id="notice"><%= flash[:notice] %></p>
-    <p id="alert"><%= flash[:alert] %></p>
-  </div>
-  <%= yield %>
-
   <body>
+    <div id="nav">
+      <% if current_user %>
+        <%= link_to "Редактировать профиль", edit_admin_user_path(current_user.id) %> |
+        <%= link_to "Выйти", :logout, method: :post %>
+      <% else %>
+        <%= link_to "Зарегистрироваться", new_admin_user_path %> |
+        <%= link_to "Войти", :login %>
+      <% end %>
+    </div>
+    <div>
+      <p id="notice"><%= flash[:notice] %></p>
+      <p id="alert"><%= flash[:alert] %></p>
+    </div>
     <%= yield %>
+
   </body>
 </html>

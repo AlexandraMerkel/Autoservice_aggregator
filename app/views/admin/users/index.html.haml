@@ -1,25 +1,12 @@
-%h1 Listing users
+%h1
+  = t('helpers.listing')
+  = User.model_name.human(count: 10)
 
-%table
-  %thead
-    %tr
-      %th Email
-      %th Crypted password
-      %th Salt
-      %th
-      %th
-      %th
+.list-group
+  - @users.each do |user|
+    = link_to(admin_user_path(user), class: 'list-group-item') do
+      = user.email
+      .clearfix
 
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.email
-        %td= user.crypted_password
-        %td= user.salt
-        %td= link_to 'Show', admin_user_path(user)
-        /%td= link_to 'Edit', edit_user_path(user)
-        /%td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
-
-= link_to 'New User', new_admin_user_path
+= link_to t('helpers.new') + ' ' + User.model_name.human(count: 1), new_admin_user_path, class: "btn btn-success"

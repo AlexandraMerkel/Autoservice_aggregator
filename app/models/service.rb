@@ -17,7 +17,7 @@ class Service < ApplicationRecord
   accepts_nested_attributes_for :pictures, allow_destroy: true
 
   validates :service_name, presence: true
-  validates :service_type, presence: true #,  inclusion: { in: SERVICE_TYPES.keys }
+  validates :service_type, presence: true
   validates :service_address, presence: true, uniqueness: {scope: :service_name}
   validates :service_phonenumber, presence: true, uniqueness: {scope: :service_name}
 
@@ -31,7 +31,6 @@ class Service < ApplicationRecord
 
   def Service.search_by_name(services, param)
     param = param.to_s
-    #params = params.to_s.gsub(/\s+/, '')
     @services = services
     @services.where("service_name ILIKE ?", '%' + param + '%')
   end
@@ -42,16 +41,19 @@ class Service < ApplicationRecord
     @services.where("service_address ILIKE ?", '%' + param + '%')
   end
 
-  def types_transform(types)
+  def Service.transform_to_number(types)
     keys = []
     SERVICE_TYPES.map{ |k, v| keys << k if v.eql?(types) }
+    keys
   end
 
-  def Service.search_by_service(services, param)
+  def Service.search_by_services(services, param)
     param = param.to_s
+    puts param
     @services = services
-    types = types_transform(param)
-    @services.where("service_type = ?", types)
+    types = transform_to_number(param)
+    puts types
+    @services.where("? = ANY(service_type)", types)
   end
 
 end

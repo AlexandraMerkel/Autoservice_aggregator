@@ -10,7 +10,7 @@ class ServicesController < ApplicationController
         @services = Service.all
         @services = @services.search_by_name(@services, params['service_name']) if params['service_name'].present?
         @services = @services.search_by_address(@services, params['service_address']) if params['service_address'].present?
-        #@services = @services.search_by_services(@services, params['service_types']) if params['service_types'].present?
+        @services = @services.search_by_services(@services, params['service_types']) if params['service_types'].present?
       end
       format.json do
         @services = Service.order("service_name").all
